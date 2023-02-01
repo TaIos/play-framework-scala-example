@@ -1,0 +1,4 @@
+->      /api                            api.Routes
+
+# === Feedback forms ===
+GET     /               controllers.FeedbackFromController.renderFormsPage()

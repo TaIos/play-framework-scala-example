@@ -1,0 +1,37 @@
+@import forms.Forms.FeedbackForm.form
+@(forms: Seq[Tables.FeedbackFormRow])(implicit messagesProvider: MessagesProvider)
+@main("Feedback form") {
+  <h1>Submitted forms</h1>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>firstName</th>
+      <th>lastName</th>
+      <th>email</th>
+      <th>phone</th>
+      <th>createdAt</th>
+      <th>text</th>
+    </tr>
+    @for(form <- forms) {
+      <tr>
+        <td>@form.id</td>
+        <td>@form.firstName</td>
+        <td>@form.lastName</td>
+        <td>@form.email</td>
+        <td>@form.phone</td>
+        <td>@form.createdAt.format("yyyy-MM-dd HH:mm:ss")</td>
+        <td>@form.text</td>
+      </tr>
+    }
+  </table>
+
+  <h1>Create new form</h1>
+  @helper.form(action = routes.FeedbackFromController.renderFormCreate()) {
+    @helper.inputText(form("firstName"))
+    @helper.inputText(form("lastName"))
+    @helper.inputText(form("email"))
+    @helper.inputText(form("phone"))
+    @helper.inputText(form("text"))
+    <input type="submit" value="Submit Form">
+  }
+}
